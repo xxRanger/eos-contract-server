@@ -10,7 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "eosjs": "^20.0.0-beta2",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.6",
     "node-fetch": "^2.3.0",
+    "sleep": "^5.2.3",
     "text-encoding": "^0.7.0"
   }
 }
