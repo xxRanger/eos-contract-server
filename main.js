@@ -8,7 +8,7 @@ const contract = require("./contract.js");
 
 router.prefix('/api/v1');
 router.get('/balance/:account',getTokenBalance)
-    .put('/balance/:account', updateToken);
+    .post('/balance/:account', updateToken);
 
 console.log("app start");
 app.use(cors());
@@ -48,7 +48,10 @@ async function updateToken () {
     }
 
     try {
-        await p.then(console.log)
+        await p.then(receipt=>{
+            ctx.response.status = 200;
+            ctx.response.body = receipt;
+        })
     } catch (err) {
         errorHandler(err)
     }
