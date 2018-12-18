@@ -26,10 +26,14 @@ function errorHandler(err) {
 async function getTokenBalance (ctx)  {
     let account = ctx.params.account;
     try {
-        await contract.getTokenBalance(account).then(balance=>{
+        await contract.getTokenBalance(account).then(payload=>{
+            let payloadArray = payload.split(' ');
+            let balance = payloadArray[0];
+            let symbol = payloadArray[1];
             ctx.response.status = 200;
             ctx.response.body = {
-                balance:balance
+                balance:balance,
+                symbol:symbol
             }
         })
     } catch (err) {
