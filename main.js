@@ -14,9 +14,9 @@ console.log("app start");
 app.use(cors());
 app.use(bodyParser());
 app.use(router.routes());
-app.listen(3000, '127.0.0.1');
+app.listen(8000, 'localhost');
 
-function errorHandler(err) {
+function errorHandler(err,ctx) {
     console.log(err.message);
     ctx.response.status = 400;
     ctx.response.body = {
@@ -37,13 +37,14 @@ async function getTokenBalance (ctx)  {
             }
         })
     } catch (err) {
-        errorHandler(err);
+        errorHandler(err,ctx);
     }
 }
 
-async function updateToken () {
+async function updateToken (ctx) {
     let amount = ctx.request.body.amount;
     let account = ctx.params.account;
+    console.log("update token for :"+account+" amount:"+amount);
     let p;
     if(amount<0) {
         p = contract.consume(account,-amount);
@@ -57,7 +58,7 @@ async function updateToken () {
             ctx.response.body = receipt;
         })
     } catch (err) {
-        errorHandler(err)
+        errorHandler(err,ctx)
     }
 }
 
